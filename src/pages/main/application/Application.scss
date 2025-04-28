@@ -1,0 +1,78 @@
+@use '/src/scss' as *;
+
+.appl {
+  min-height: 100vh;
+  background-color: rgb(249 250 251 / 1);
+
+  &__header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    background: #fff;
+    border-bottom: 1px solid hsla(0, 0%, 95%, .251);
+    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, .1);
+
+    .close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgb(249 250 251 / 1);
+      box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.1);
+
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .h100 {
+    min-height: calc(100vh - 86px);
+  }
+
+  &__content {
+    height: 100%;
+    padding-block: 50px;
+
+    .wrapper {
+      width: 500px;
+      text-align: center;
+      padding: 40px;
+      border-radius: 30px;
+      background: #fff;
+    }
+
+    .title {
+      font-weight: 500;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .subtitle {
+      font-size: 22px;
+      margin-bottom: 1rem;
+      color: $main-color;
+    }
+    .desc {
+      margin-bottom: 2rem;
+      color: #999;
+    }
+
+    .form {
+
+      .ant-form-item-label label {
+          font-size: 16px;
+      }
+      input {
+        font-size: 16px;
+        padding: 12px 1rem;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        outline: none;
+
+        &:focus {
+          border-color: $main-color;
+        }
+      }
+    }
+  }
+}
