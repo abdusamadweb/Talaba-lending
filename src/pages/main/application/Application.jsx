@@ -1,5 +1,5 @@
 import './Application.scss'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import logo from '../../../assets/images/logo.svg'
 import {Link} from "react-router-dom"
 import {Button, Form, Input} from "antd";
@@ -27,10 +27,18 @@ const Application = () => {
     const [count, setCount] = useState(0)
     const [loading, setLoading] = useState(false)
 
+    // sms timer
+    const [active, setActive] = useState(false)
+    const [timeLeft, setTimeLeft] = useState(120)
+
+
+    // submit form
     const onFormSubmit = (values) => {
 
         if (count === 0) {
             setLoading(true)
+
+            startTimer()
 
             setTimeout(() => {
                 setCount(1)
@@ -51,6 +59,42 @@ const Application = () => {
             ...values,
         }
         console.log(count, '--- count ---')
+    }
+
+
+    // timer
+    useEffect(() => {
+        if (!active) return;
+
+        const timer = setInterval(() => {
+            setTimeLeft((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer)
+                    setActive(false)
+                    return 0
+                }
+                return prev - 1
+            })
+        }, 1000)
+
+        return () => clearInterval(timer)
+    }, [active])
+
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60)
+        const secs = seconds % 60
+        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`
+    }
+
+    function startTimer() {
+        setTimeLeft(120)
+        setActive(true)
+    }
+
+    const retryOnFinish = () => {
+
+        startTimer()
+        // mutation.mutate(sms.phone_number)
     }
 
 
@@ -79,30 +123,55 @@ const Application = () => {
                             form={form}
                         >
 
-                            {
-                                count < 1 &&
+                            {count < 2 && (
                                 <Form.Item
                                     name='phone_number'
                                     label='Telefon raqam'
-                                    rules={[{required: true, message: ''}]}
+                                    rules={[{ required: true, message: '' }]}
                                 >
-                                    <PhoneInput/>
+                                    <PhoneInput />
                                 </Form.Item>
-                            }
-                            {
-                                count < 2 ?
+                            )}
+
+                            {count === 1 && (
+                                <div>
                                     <Form.Item
-                                        name='phone_number'
-                                        label='Telefon raqam'
-                                        rules={[{required: true, message: ''}]}
+                                        name='code'
+                                        label='Kodni kiriting'
+                                        rules={[{ required: true, message: '' }]}
                                     >
-                                        <PhoneInput/>
+                                        <Input type='tel' placeholder='Kodni kiriting' />
                                     </Form.Item>
-                                    :
-                                    <div>
-                                        2
+                                    <div className='sms-retry'>
+                                        <p className='txt'>SMS ni qayta yuborish:</p>
+                                        {
+                                            active ? <span className='sms-btn'>{formatTime(timeLeft)}</span>
+                                                :
+                                                <button className='sms-btn' onClick={retryOnFinish} type='button'>Qayta
+                                                    yuborish</button>
+                                        }
                                     </div>
-                            }
+                                </div>
+                            )}
+
+                            {count > 1 && (
+                                <div>
+                                    <Form.Item
+                                        name='password'
+                                        label='Parolni kiriting'
+                                        rules={[{ required: true, message: '' }]}
+                                    >
+                                        <Input type='text' placeholder='Parolni kiriting' />
+                                    </Form.Item>
+                                    <Form.Item
+                                        name='cPassword'
+                                        label='Parolni tasdiqlang'
+                                        rules={[{ required: true, message: '' }]}
+                                    >
+                                        <Input type='text' placeholder='Parolni kiriting' />
+                                    </Form.Item>
+                                </div>
+                            )}
 
                             <Button
                                 className='btn'

@@ -2,7 +2,7 @@
 
 .appl {
   min-height: 100vh;
-  background-color: rgb(249 250 251 / 1);
+  background-color: rgb(232, 236, 236);
 
   &__header {
     position: sticky;
@@ -59,6 +59,18 @@
 
     .form {
 
+      .sms-retry {
+        margin-bottom: 1rem;
+
+        .sms-btn {
+          font-weight: 500;
+          color: $main-color;
+        }
+      }
+
+      .ant-form-item {
+        margin-bottom: 1rem;
+      }
       .ant-form-item-label label {
           font-size: 16px;
       }
