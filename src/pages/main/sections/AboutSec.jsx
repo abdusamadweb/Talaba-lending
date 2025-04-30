@@ -2,6 +2,7 @@ import React from 'react';
 import img from '../../../assets/images/about-img.png'
 import card1 from '../../../assets/images/about-card1.png'
 import card2 from '../../../assets/images/about-card2.png'
+import {Link} from "react-router-dom";
 
 const AboutSec = () => {
     return (
@@ -10,12 +11,11 @@ const AboutSec = () => {
                 <div className="about__inner">
                     <div className="wrapper">
                         <div className="about__titles">
-                            <h3 className="title">Agar siz ingliz tilini ham bilmasangiz ham PDP
-                                University'ning o'zida 2 yil chuqurlashtirilgan ingliz tili
-                                kurslarida o'qib IELTS'dan 6+ darajaga erishasiz</h3>
+                            <h3 className="title">
+                                Talabalarimizga bu jarayonni yanada osonlashtirish uchun maxsus qo'llanmalar va yordam taklif etiladi.</h3>
                         </div>
                         <img className="about__img" src={img} alt="img"/>
-                        <a className="ariza" href='#application'>Ariza topshirish</a>
+                        <Link className='ariza' to='/application'>Ariza topshirish</Link>
                     </div>
                     <div className="about__content">
                         <div className="card main-card">
@@ -28,7 +28,7 @@ const AboutSec = () => {
                             <div className="card">
                                 <div>
                                     <img className='card__img' src={card1} alt="img"/>
-                                    <p className="card__desc">Talabalarimizdan kutayotgan natijalarimiz <span>3-kursdan boshlab</span> minimum
+                                    <p className="card__desc"><span>3-kursdan boshlab</span> Mahalliy va Xalqaro kompaniyalarda ish topish imkoniyatiga ega bo'lishadi.
                                     </p>
                                 </div>
                                 <span className='card__price'>300$ - 400$</span>
@@ -36,12 +36,12 @@ const AboutSec = () => {
                             <div className="card">
                                 <div>
                                     <img className='card__img' src={card2} alt="img"/>
-                                    <p className="card__desc"><span>4-kursni</span> bitirgandan so'ng esa</p>
+                                    <p className="card__desc"><span>4-kursni</span> Universitetni bitirgan talabalarga O'zbekiston diplomi beriladi.</p>
                                 </div>
                                 <span className='card__price'>1000$</span>
                             </div>
                         </div>
-                        <a className='ariza' href="/#application">Ariza topshirish</a>
+                        <Link className='ariza' to='/application'>Ariza topshirish</Link>
                     </div>
                 </div>
             </div>
